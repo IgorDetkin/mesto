@@ -9,97 +9,118 @@
 
   <body class="root">
     <div class="page">
-      <header class="header">
-        <img class="header__logo" src="./images/logo.svg" alt="логотип" />
-        <div class="header__line"></div>
-      </header>
 
-      <main class="content">
-        <section class="profile">
-          <img class="profile__image" src="./images/Avatar.png" alt="аватар" />
+        <header class="header">
+          <img class="header__logo" src="./images/logo.svg" alt="логотип" />
+          <div class="header__line"></div>
+        </header>
 
-          <div class="profile__info">
-            <div class="profile__name_edit">
-              <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <button class="profile__edit"></button>
-            </div>
-
-            <p class="profile__subtitle">Исследователь океана</p>
-          </div>
-
-          <button class="profile__add"></button>
-        </section>
-
-        <section class="elements">
-          <div class="elements__card">
-            <img class="elements__img" src="./images/Amur.jpg" alt="Амур" />
-            <div class="elements__border">
-              <h2 class="elements__title">Амур</h2>
-              <button class="elements__like"></button>
-            </div>
-          </div>
-
-          <div class="elements__card">
+        <main class="content">
+          <section class="profile">
             <img
-              class="elements__img"
-              src="./images/Balashiha.jpg"
-              alt="Балашиха"
+              class="profile__image"
+              src="./images/Avatar.png"
+              alt="аватар"
             />
-            <div class="elements__border">
-              <h2 class="elements__title">Балашиха</h2>
-              <button class="elements__like"></button>
+
+            <div class="profile__info">
+              <div class="profile__name_edit">
+                <h1 class="profile__title">Жак-Ив Кусто</h1>
+                <button class="profile__edit"></button>
+              </div>
+
+              <p class="profile__subtitle">Исследователь океана</p>
             </div>
+
+            <button class="profile__add"></button>
+          </section>
+
+          <section class="elements">
+            <div class="elements__card">
+              <img class="elements__img" src="./images/Amur.jpg" alt="Амур" />
+              <div class="elements__border">
+                <h2 class="elements__title">Амур</h2>
+                <button class="elements__like"></button>
+              </div>
+            </div>
+
+            <div class="elements__card">
+              <img
+                class="elements__img"
+                src="./images/Balashiha.jpg"
+                alt="Балашиха"
+              />
+              <div class="elements__border">
+                <h2 class="elements__title">Балашиха</h2>
+                <button class="elements__like"></button>
+              </div>
+            </div>
+
+            <div class="elements__card">
+              <img
+                class="elements__img"
+                src="./images/Mogocha.jpg"
+                alt="Могоча"
+              />
+              <div class="elements__border">
+                <h2 class="elements__title">Могоча</h2>
+                <button class="elements__like"></button>
+              </div>
+            </div>
+
+            <div class="elements__card">
+              <img
+                class="elements__img"
+                src="./images/kalyazin.jpg"
+                alt="Калязин"
+              />
+              <div class="elements__border">
+                <h2 class="elements__title">Калязин</h2>
+                <button class="elements__like"></button>
+              </div>
+            </div>
+
+            <div class="elements__card">
+              <img
+                class="elements__img"
+                src="./images/Vyborg.jpg"
+                alt="Выборг"
+              />
+              <div class="elements__border">
+                <h2 class="elements__title">Выборг</h2>
+                <button class="elements__like"></button>
+              </div>
+            </div>
+
+            <div class="elements__card">
+              <img
+                class="elements__img"
+                src="./images/medvezhyegorsk.jpg"
+                alt="Медвежьегорск"
+              />
+              <div class="elements__border">
+                <h2 class="elements__title">Медвежьегорск</h2>
+                <button class="elements__like"></button>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer class="footer">
+          <p class="footer__copyright">© 2022 Igor Detkin</p>
+        </footer>
+
+        <div class="popup popup_opened">
+          <form class="popup-container">
+            <h2 class="popup-container__title">Редактировать профиль</h2>
+            <input type="text" placeholder="Жак-Ив Кусто"  class="popup-container__name">
+            <input type="text" placeholder="Исследователь" class="popup-container__about">
+            <button class="popup-container__save">Сохранить</button>
+          </form>
+          <button class="popup-container__exit"></button>
+          <div class="popup__opacity"></div>
           </div>
 
-          <div class="elements__card">
-            <img
-              class="elements__img"
-              src="./images/Mogocha.jpg"
-              alt="Могоча"
-            />
-            <div class="elements__border">
-              <h2 class="elements__title">Могоча</h2>
-              <button class="elements__like"></button>
-            </div>
-          </div>
-
-          <div class="elements__card">
-            <img
-              class="elements__img"
-              src="./images/kalyazin.jpg"
-              alt="Калязин"
-            />
-            <div class="elements__border">
-              <h2 class="elements__title">Калязин</h2>
-              <button class="elements__like"></button>
-            </div>
-          </div>
-
-          <div class="elements__card">
-            <img class="elements__img" src="./images/Vyborg.jpg" alt="Выборг" />
-            <div class="elements__border">
-              <h2 class="elements__title">Выборг</h2>
-              <button class="elements__like"></button>
-            </div>
-          </div>
-
-          <div class="elements__card">
-            <img
-              class="elements__img"
-              src="./images/medvezhyegorsk.jpg"
-              alt="Медвежьегорск"
-            />
-            <div class="elements__border">
-              <h2 class="elements__title">Медвежьегорск</h2>
-              <button class="elements__like"></button>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="footer">
-        <p class="footer__copyright">© 2022 Igor Detkin</p>
-      </footer>
     </div>
   </body>
 </html>

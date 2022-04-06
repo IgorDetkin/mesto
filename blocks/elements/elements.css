@@ -80,7 +80,7 @@
 }
 
 
-@media all and (min-width: 768px) and (max-width: 1023px) {
+@media all and (min-width: 767px) and (max-width: 1023px) {
   .elements {
     margin: 51px 93px 0;
 
