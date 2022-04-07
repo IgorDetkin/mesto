@@ -2,7 +2,7 @@ let editButton = document.querySelector('.profile__edit');
 let editPopup = document.querySelector('.popup');
 
 function openPopup() {
-  editPopup.classList.add('popup_opened');
+  editPopup.classList.add('popup__opened');
 
 };
 
@@ -15,7 +15,7 @@ editButton.addEventListener('click', openPopup);
 let exitButton = document.querySelector('.popup-container__exit');
 
 function closePopup() {
-  editPopup.classList.remove('popup_opened');
+  editPopup.classList.remove('popup__opened');
 
 }
 
