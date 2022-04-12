@@ -12,7 +12,7 @@ editButton.addEventListener('click', openPopup);
 
 
 
-let exitButton = document.querySelector('.popup-container__exit');
+let exitButton = document.querySelector('.popup__exit');
 
 function closePopup() {
   editPopup.classList.remove('popup__opened');
@@ -24,10 +24,10 @@ exitButton.addEventListener('click', closePopup);
 
 
 
-let formElement = document.querySelector('.popup-container');
+let formElement = document.querySelector('.popup__container');
 
-let nameInput = document.querySelector('.popup-container__name');
-let jobInput = document.querySelector('.popup-container__about');
+let nameInput = document.querySelector('.popup__name');
+let jobInput = document.querySelector('.popup__about');
 let profileName = document.querySelector('.profile__title');
 let profileJob = document.querySelector('.profile__subtitle');
 
@@ -42,4 +42,7 @@ function formSubmitHandler (evt) {
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+
+
 
