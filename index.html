@@ -11,7 +11,6 @@
     <div class="page">
       <header class="header">
         <img class="header__logo" src="./images/logo.svg" alt="логотип" />
-        <div class="header__line"></div>
       </header>
 
       <main class="content">
@@ -21,21 +20,32 @@
           <div class="profile__info">
             <div class="profile__name-edit">
               <h1 class="profile__title">Жак-Ив Кусто</h1>
-              <button type="button" class="profile__edit"></button>
+              <button
+                aria-label="edit"
+                type="button"
+                class="profile__edit"
+              ></button>
             </div>
 
             <p class="profile__subtitle">Исследователь океана</p>
           </div>
 
-          <button type="button" class="profile__add"></button>
+          <button type="button" aria-label="add" class="profile__add"></button>
         </section>
 
         <section class="elements">
           <div class="elements__card">
-            <img class="elements__img" src="./images/Amur.jpg" alt="Амур" />
+            <img
+              class="elements__img"
+              src="./images/Amur.jpg"
+              alt="Амур" />
             <div class="elements__border">
               <h2 class="elements__title">Амур</h2>
-              <button type="button" class="elements__like"></button>
+              <button
+                type="button"
+                aria-label="like"
+                class="elements__like"
+              ></button>
             </div>
           </div>
 
@@ -47,7 +57,11 @@
             />
             <div class="elements__border">
               <h2 class="elements__title">Балашиха</h2>
-              <button class="elements__like"></button>
+              <button
+                type="button"
+                aria-label="like"
+                class="elements__like"
+              ></button>
             </div>
           </div>
 
@@ -59,7 +73,11 @@
             />
             <div class="elements__border">
               <h2 class="elements__title">Могоча</h2>
-              <button class="elements__like"></button>
+              <button
+                type="button"
+                aria-label="like"
+                class="elements__like"
+              ></button>
             </div>
           </div>
 
@@ -71,15 +89,26 @@
             />
             <div class="elements__border">
               <h2 class="elements__title">Калязин</h2>
-              <button class="elements__like"></button>
+              <button
+                type="button"
+                aria-label="like"
+                class="elements__like"
+              ></button>
             </div>
           </div>
 
           <div class="elements__card">
-            <img class="elements__img" src="./images/Vyborg.jpg" alt="Выборг" />
+            <img
+              class="elements__img"
+              src="./images/Vyborg.jpg"
+              alt="Выборг" />
             <div class="elements__border">
               <h2 class="elements__title">Выборг</h2>
-              <button class="elements__like"></button>
+              <button
+                type="button"
+                aria-label="like"
+                class="elements__like"
+              ></button>
             </div>
           </div>
 
@@ -91,38 +120,47 @@
             />
             <div class="elements__border">
               <h2 class="elements__title">Медвежьегорск</h2>
-              <button class="elements__like"></button>
+              <button
+                type="button"
+                aria-label="like"
+                class="elements__like"
+              ></button>
             </div>
           </div>
         </section>
       </main>
 
       <footer class="footer">
-        <p class="footer__copyright">© 2022 Igor Detkin</p>
+        <p class="footer__copyright">
+          &#169; 2022 Igor Detkin</p>
       </footer>
 
       <div class="popup">
         <div class="popup__container">
-          <form class="popup__form">
+          <form name="edit_form" class="popup__form">
             <h2 class="popup__title">Редактировать профиль</h2>
             <input
+              name="name"
               type="text"
-              placeholder="Жак-Ив Кусто"
-              value="Жак-Ив Кусто"
-              class="popup__name"
+              placeholder="Ваше имя"
+              value=""
+              class="popup__name popup__name_input_name"
               required
             />
             <input
+              name="about"
               type="text"
-              placeholder="Исследователь"
-              value="Исследователь"
-              class="popup__about"
+              placeholder="Род деятельности"
+              value=""
+              class="popup__name popup__name_input_about"
               required
             />
-            <button type="submit" class="popup__save">Сохранить</button>
+            <button type="submit" aria-label="save" class="popup__save">
+              Сохранить
+            </button>
           </form>
 
-          <button type="button" class="popup__exit"></button>
+          <button type="button" aria-label="exit" class="popup__exit"></button>
         </div>
       </div>
     </div>
