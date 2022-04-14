@@ -1,5 +1,5 @@
 .profile__title {
-    max-width: 400px;
+    max-width: 300px;
     margin: 4px 0 0;
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
@@ -12,17 +12,11 @@
     overflow: hidden;
 }
 
-@media all and (min-width: 320px) and (max-width: 767px) {
+@media all and (min-width: 320px) and (max-width: 1060px) {
   .profile__title {
-    max-width: 250px;
+    max-width: 190px;
     margin: 0;
     font-size: 27px;
     line-height: 33px;
-  }
-}
-
-@media all and (min-width: 767px) and (max-width: 1080px) {
-  .profile__title {
-    font-size: 38px;
   }
 }

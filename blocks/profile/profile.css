@@ -14,16 +14,10 @@
   }
 }
 
-@media all and (min-width: 767px) and (max-width: 1023px) {
+@media all and (min-width: 767px) and (max-width: 1060px) {
   .profile {
     margin: 40px 50px auto;
+    flex-direction: column;
+    justify-content: center;
   }
 }
-
-@media all and (min-width: 1023px) and (max-width: 1040px) {
-  .profile {
-    /* margin: 40px 195px auto; */
-  }
-}
-
-
