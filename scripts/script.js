@@ -29,7 +29,7 @@ exitButton.addEventListener('click', closePopup);
 formElement.addEventListener('submit', formSubmitHandler);
 
 // попап добавления новых карточек и лайкания их
-const addPopup = document.querySelector('.popup-add');
+const addPopup = document.querySelector('#popup-add');
 const addButton = document.querySelector('.profile__add');
 const addFormElement = document.querySelector('.popup__form_add');
 const addNameInput = document.querySelector('.popup__name_input_term');
@@ -38,13 +38,13 @@ const addExitButton = document.querySelector('.popup__exit_add');
 const addSaveButton = document.querySelector('.popup__save_add');
 
 function openAddPopup() {
-  addPopup.classList.add('popup-add_opened');
+  addPopup.classList.add('popup_opened');
   addNameInput.value = "";
   addLinkInput.value = "";
 }
 
 function closeAddPopup() {
-  addPopup.classList.remove('popup-add_opened');
+  addPopup.classList.remove('popup_opened');
 }
 
 function addImage (event) {

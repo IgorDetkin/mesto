@@ -6,17 +6,9 @@
   height: 100%;
   top: 0px;
   display: flex;
-  /* display: none; */
   opacity: 0;
   visibility: hidden;
   transition: opacity 1s, visibility 0s 1s;
   justify-content: center;
   align-items: center;
-}
-
-.popup_opened {
-  transition: opacity 1s, visibility 0s;
-  visibility: visible;
-  opacity: 1;
-
 }
