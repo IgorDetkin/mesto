@@ -31,7 +31,6 @@ const addSaveButton = document.querySelector('.popup__save_add');
 // функция открытия любого попапа
 function openPopup(anyPopup) {
   anyPopup.classList.add('popup_opened');
-  addFormElement.reset();
 }
 
 // функция закрытия любого попапа
@@ -130,6 +129,7 @@ initialCards.forEach(function(item) {
 // функция, чтобы карточки мог добавить пользователь в DOM
 function addCard (event) {
     event.preventDefault()
+    addFormElement.reset();
     elementsContainer.prepend(createCard(addNameInput.value, addLinkInput.value));
     closePopup(addPopup);
   }
