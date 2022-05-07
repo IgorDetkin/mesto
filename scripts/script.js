@@ -31,6 +31,7 @@ const addSaveButton = document.querySelector('.popup__save_add');
 // функция открытия любого попапа
 function openPopup(anyPopup) {
   anyPopup.classList.add('popup_opened');
+  addFormElement.reset();
 }
 
 // функция закрытия любого попапа
@@ -131,13 +132,13 @@ function addCard (event) {
     event.preventDefault()
     elementsContainer.prepend(createCard(addNameInput.value, addLinkInput.value));
     closePopup(addPopup);
-    addFormElement.reset();
   }
 
 // слушатели для открытия, закрытия и редактирования профиля пользователя
 editButton.addEventListener('click', openPopupEdit);
 exitButton.addEventListener('click', function () {closePopup(anyPopup)});
 editFormElement.addEventListener('submit', editFormSubmitHandler);
+
 
 // слушатели для открытия, закрытия добавления новых карточек пользователем
 addButton.addEventListener('click', function () {openPopup(addPopup)});
