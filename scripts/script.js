@@ -1,6 +1,6 @@
 // попап редактирования  и сохранения данных профиля
 const editButton = document.querySelector('.profile__edit');
-const editPopup = document.querySelector('.popup');
+const anyPopup = document.querySelector('.popup');
 const exitButton = document.querySelector('.popup__exit');
 const editFormElement = document.querySelector('.popup__form');
 const nameInput = document.querySelector('.popup__name_input_name');
@@ -13,10 +13,10 @@ const elementsContainer = document.querySelector('.elements');
 const elementTemplate = document.querySelector('#elements-template').content;
 
 // переменные для попапа полного экрана картинкок
-const imgPopupImg = document.querySelector('.popup-image__img');
-const imgPopupName = document.querySelector('.popup-image__title');
-const imgPopup = document.querySelector('.popup-image');
-const imgExitButton = document.querySelector('.popup-image__exit')
+const imgPopupImg = document.querySelector('.popup__image-img');
+const imgPopupName = document.querySelector('.popup__image-title');
+const imgPopup = document.querySelector('#popup-image');
+const imgExitButton = document.querySelector('.popup__exit_img')
 
 // переменные для попапа добавления карточек пользователем
 const addPopup = document.querySelector('#popup-add');
@@ -28,59 +28,49 @@ const addExitButton = document.querySelector('.popup__exit_add');
 const addSaveButton = document.querySelector('.popup__save_add');
 
 
-
-
-
-
-function openPopup() {
-  editPopup.classList.add('popup_opened');
+// функция открытия любого попапа
+function openPopup(anyPopup) {
+  anyPopup.classList.add('popup_opened');
+  addFormElement.reset();
 }
 
-function closePopup() {
-  editPopup.classList.remove('popup_opened');
+// функция закрытия любого попапа
+function closePopup(anyPopup) {
+  anyPopup.classList.remove('popup_opened');
 }
 
+// функция открытия попапа с уже находящимися внутри данными
 function openPopupEdit() {
 nameInput.value = profileName.textContent;
 jobInput.value = profileJob.textContent;
-openPopup(editPopup);
+openPopup(anyPopup);
 }
 
+// функция изменеия данных в попапе и закрытия после сохранения
 function editFormSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup();
+  closePopup(anyPopup);
 }
 
-// функции для слушателей карточек
+// функции для слушателей лайка карточки
 function toggleLikeHandler(event) {
   event.target.classList.toggle('elements__like_active');
 };
 
+// функция для слушателей удаления карточки
 function deleteCardHandler(event) {
 const deleteCard = event.target.closest('.elements__card');
 deleteCard.remove();
 };
 
-function openViewStartImg(elementPlace) {
+// функция связывания данных из карточки в попап раскрытия на весь экран и открытие этого попапа
+function viewImg(elementPlace) {
 imgPopupImg.src = elementPlace.querySelector('.elements__img').src;
 imgPopupImg.alt = elementPlace.querySelector('.elements__img').alt;
 imgPopupName.textContent = elementPlace.querySelector('.elements__title').textContent;
-imgPopup.classList.add('popup-image_opened');
-}
-
-function closeViewImgPopup (event) {
-imgPopup.classList.remove('popup-image_opened');
-}
-
-function openAddPopup() {
-  addPopup.classList.add('popup_opened');
-  addFormElement.reset();
-}
-
-function closeAddPopup() {
-  addPopup.classList.remove('popup_opened');
+openPopup(imgPopup);
 }
 
 // добавление первых 6 карточек при загрузке страницы и возможности лайкания, удаления, раскрытия их
@@ -126,36 +116,34 @@ function createCard(name, link) {
   elementPlace.querySelector('.elements__delete').addEventListener('click', deleteCardHandler);
 
   // раскрытие на весь экран
-  elementPlace.querySelector('.elements__img').addEventListener('click', function () {openViewStartImg(elementPlace)});
-
-  // закрытие раскрытия на весь экран
-  imgExitButton.addEventListener('click', closeViewImgPopup);
+  elementPlace.querySelector('.elements__img').addEventListener('click', function () {viewImg(elementPlace)});
 
   //возвращается созданная карточка
   return elementPlace;
   }
-
 
 // функция,  перебирающая элементы из массива и добавляющая их в DOM
 initialCards.forEach(function(item) {
   elementsContainer.append(createCard(item.name, item.link));
 });
 
-// функция, чтобы карточки мог добавить полбзователь в DOM
-function addImage (event) {
+// функция, чтобы карточки мог добавить пользователь в DOM
+function addCard (event) {
     event.preventDefault()
     elementsContainer.prepend(createCard(addNameInput.value, addLinkInput.value));
-    closeAddPopup();
+    closePopup(addPopup);
   }
-
 
 // слушатели для открытия, закрытия и редактирования профиля пользователя
 editButton.addEventListener('click', openPopupEdit);
-exitButton.addEventListener('click', closePopup);
+exitButton.addEventListener('click', function () {closePopup(anyPopup)});
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 
 
 // слушатели для открытия, закрытия добавления новых карточек пользователем
-addButton.addEventListener('click', openAddPopup);
-addExitButton.addEventListener('click', closeAddPopup) ;
-addFormElement.addEventListener('submit', addImage);
+addButton.addEventListener('click', function () {openPopup(addPopup)});
+addExitButton.addEventListener('click', function () {closePopup(addPopup)});
+addFormElement.addEventListener('submit', addCard);
+
+// закрытие карточки на весь экран
+imgExitButton.addEventListener('click', function () {closePopup(imgPopup)});
