@@ -139,7 +139,6 @@ editButton.addEventListener('click', openPopupEdit);
 exitButton.addEventListener('click', function () {closePopup(anyPopup)});
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 
-
 // слушатели для открытия, закрытия добавления новых карточек пользователем
 addButton.addEventListener('click', function () {openPopup(addPopup)});
 addExitButton.addEventListener('click', function () {closePopup(addPopup)});
