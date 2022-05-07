@@ -129,9 +129,9 @@ initialCards.forEach(function(item) {
 // функция, чтобы карточки мог добавить пользователь в DOM
 function addCard (event) {
     event.preventDefault()
-    addFormElement.reset();
     elementsContainer.prepend(createCard(addNameInput.value, addLinkInput.value));
     closePopup(addPopup);
+    addFormElement.reset();
   }
 
 // слушатели для открытия, закрытия и редактирования профиля пользователя
