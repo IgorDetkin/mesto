@@ -3,10 +3,12 @@ const editButton = document.querySelector('.profile__edit');
 const anyPopup = document.querySelector('.popup');
 const exitButton = document.querySelector('.popup__exit');
 const editFormElement = document.querySelector('.popup__form');
-const nameInput = document.querySelector('.popup__name_input_name');
-const jobInput = document.querySelector('.popup__name_input_about');
+const nameInput = document.querySelector('#name-input');
+const jobInput = document.querySelector('#about-input');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
+const saveButton = document.querySelector('.popup__save');
+// const exitButtons = document.querySelectorAll('.popup__exit');
 
 // переменные для карточек
 const elementsContainer = document.querySelector('.elements');
@@ -21,17 +23,19 @@ const imgExitButton = document.querySelector('.popup__exit_img')
 // переменные для попапа добавления карточек пользователем
 const addPopup = document.querySelector('#popup-add');
 const addButton = document.querySelector('.profile__add');
-const addFormElement = document.querySelector('.popup__form_add');
-const addNameInput = document.querySelector('.popup__name_input_term');
-const addLinkInput = document.querySelector('.popup__name_input_link');
+const addFormElement = document.querySelector('#formAdd');
+const addNameInput = document.querySelector('#cardname');
+const addLinkInput = document.querySelector('#cardlink');
 const addExitButton = document.querySelector('.popup__exit_add');
-const addSaveButton = document.querySelector('.popup__save_add');
+// const addSaveButton = document.querySelector('.popup__save_add');
 
 
 // функция открытия любого попапа
 function openPopup(anyPopup) {
   anyPopup.classList.add('popup_opened');
   addFormElement.reset();
+  document.addEventListener('keydown', closePopupEsc);
+  document.addEventListener('click', closePopupOverlay);
 }
 
 // функция закрытия любого попапа
@@ -45,6 +49,26 @@ nameInput.value = profileName.textContent;
 jobInput.value = profileJob.textContent;
 openPopup(anyPopup);
 }
+
+// закрытие попапа нажатием на ESC
+function closePopupEsc (evt) {
+  if (evt.key === 'Escape') {
+  const openedPopup = document.querySelector('.popup_opened');
+  closePopup(openedPopup);
+  console.log(evt);
+  document.removeEventListener('keydown', closePopupEsc);
+  }
+};
+
+// закрытие любого попапа кликом на оверлэй
+function closePopupOverlay (evt) {
+  const openedPopup = document.querySelector('.popup_opened');
+  if (evt.target === openedPopup) {
+  closePopup(openedPopup);
+  console.log(evt);
+  document.removeEventListener('click', closePopupOverlay);
+  }
+};
 
 // функция изменеия данных в попапе и закрытия после сохранения
 function editFormSubmitHandler (evt) {

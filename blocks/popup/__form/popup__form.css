@@ -2,6 +2,7 @@
   margin: 34px 36px 37px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 @media all and (min-width: 320px) and (max-width: 767px) {
