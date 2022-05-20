@@ -1,6 +1,6 @@
 // попап редактирования  и сохранения данных профиля
 const editButton = document.querySelector('.profile__edit');
-const anyPopup = document.querySelector('.popup');
+const popup = document.querySelector('.popup');
 const exitButton = document.querySelector('.popup__exit');
 const editFormElement = document.querySelector('.popup__form');
 const nameInput = document.querySelector('#name-input');
@@ -9,6 +9,11 @@ const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const saveButton = document.querySelector('.popup__save');
 // const exitButtons = document.querySelectorAll('.popup__exit');
+const saveButtonStatus = document.querySelector('.popup__save-status');
+
+
+
+
 
 // переменные для карточек
 const elementsContainer = document.querySelector('.elements');
@@ -31,33 +36,24 @@ const addExitButton = document.querySelector('.popup__exit_add');
 
 
 // функция открытия любого попапа
-function openPopup(anyPopup) {
-  anyPopup.classList.add('popup_opened');
-  addFormElement.reset();
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEsc);
-  document.addEventListener('click', closePopupOverlay);
 }
 
 // функция закрытия любого попапа
-function closePopup(anyPopup) {
-  anyPopup.classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
 }
 
-// функция открытия попапа с уже находящимися внутри данными
-function openPopupEdit() {
-nameInput.value = profileName.textContent;
-jobInput.value = profileJob.textContent;
-openPopup(anyPopup);
-}
 
 // закрытие попапа нажатием на ESC
 function closePopupEsc (evt) {
   if (evt.key === 'Escape') {
   const openedPopup = document.querySelector('.popup_opened');
   closePopup(openedPopup);
-  console.log(evt);
-  document.removeEventListener('keydown', closePopupEsc);
-  }
+}
 };
 
 // закрытие любого попапа кликом на оверлэй
@@ -65,17 +61,27 @@ function closePopupOverlay (evt) {
   const openedPopup = document.querySelector('.popup_opened');
   if (evt.target === openedPopup) {
   closePopup(openedPopup);
-  console.log(evt);
-  document.removeEventListener('click', closePopupOverlay);
+  // document.removeEventListener('click', closePopupOverlay);
   }
 };
+
+
+
+
+
+// функция открытия попапа с уже находящимися внутри данными
+function openPopupEdit() {
+nameInput.value = profileName.textContent;
+jobInput.value = profileJob.textContent;
+openPopup(popup);
+}
 
 // функция изменеия данных в попапе и закрытия после сохранения
 function editFormSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup(anyPopup);
+  closePopup(popup);
 }
 
 // функции для слушателей лайка карточки
@@ -127,6 +133,7 @@ const initialCards = [
 
 // функция создания карточки
 function createCard(name, link) {
+
   const elementPlace = elementTemplate.querySelector('.elements__card').cloneNode(true);
 
   elementPlace.querySelector('.elements__img').src = link;
@@ -156,11 +163,13 @@ function addCard (event) {
     event.preventDefault()
     elementsContainer.prepend(createCard(addNameInput.value, addLinkInput.value));
     closePopup(addPopup);
+    disableSaveButton (saveButtonStatus);
+    addFormElement.reset();
   }
 
 // слушатели для открытия, закрытия и редактирования профиля пользователя
 editButton.addEventListener('click', openPopupEdit);
-exitButton.addEventListener('click', function () {closePopup(anyPopup)});
+exitButton.addEventListener('click', function () {closePopup(popup)});
 editFormElement.addEventListener('submit', editFormSubmitHandler);
 
 // слушатели для открытия, закрытия добавления новых карточек пользователем
@@ -170,3 +179,14 @@ addFormElement.addEventListener('submit', addCard);
 
 // закрытие карточки на весь экран
 imgExitButton.addEventListener('click', function () {closePopup(imgPopup)});
+
+
+//обработчики, который навешены не на документ.
+popup.addEventListener('click', closePopupOverlay);
+
+addPopup.addEventListener('click', closePopupOverlay);
+
+imgPopup.addEventListener('click', closePopupOverlay);
+
+
+
