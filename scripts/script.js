@@ -53,7 +53,7 @@ function closePopupEsc (evt) {
   if (evt.key === 'Escape') {
   const openedPopup = document.querySelector('.popup_opened');
   closePopup(openedPopup);
-}
+  }
 };
 
 // закрытие любого попапа кликом на оверлэй
@@ -61,9 +61,10 @@ function closePopupOverlay (evt) {
   const openedPopup = document.querySelector('.popup_opened');
   if (evt.target === openedPopup) {
   closePopup(openedPopup);
-};
+  };
+}
 
-
+popup.addEventListener('click', closePopupOverlay);
 
 
 
@@ -169,21 +170,16 @@ function addCard (event) {
 editButton.addEventListener('click', openPopupEdit);
 exitButton.addEventListener('click', function () {closePopup(popup)});
 editFormElement.addEventListener('submit', editFormSubmitHandler);
+popup.addEventListener('click', closePopupOverlay);
 
 // слушатели для открытия, закрытия добавления новых карточек пользователем
 addButton.addEventListener('click', function () {openPopup(addPopup)});
 addExitButton.addEventListener('click', function () {closePopup(addPopup)});
 addFormElement.addEventListener('submit', addCard);
+addPopup.addEventListener('click', closePopupOverlay);
 
 // закрытие карточки на весь экран
 imgExitButton.addEventListener('click', function () {closePopup(imgPopup)});
-
-
-//обработчики, который навешены не на документ.
-popup.addEventListener('click', closePopupOverlay);
-
-addPopup.addEventListener('click', closePopupOverlay);
-
 imgPopup.addEventListener('click', closePopupOverlay);
 
 
