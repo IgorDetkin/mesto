@@ -1,3 +1,7 @@
+
+import {initialCards, Card} from './card.js';
+import {ValidationSetup, FormValidator} from './formValidator.js'
+
 // попап редактирования  и сохранения данных профиля
 const editButton = document.querySelector('.profile__edit');
 const popup = document.querySelector('.popup');
@@ -8,35 +12,31 @@ const jobInput = document.querySelector('#about-input');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const saveButton = document.querySelector('.popup__save');
-// const exitButtons = document.querySelectorAll('.popup__exit');
 const saveButtonStatus = document.querySelector('.popup__save-status');
 
-
-
-
-
-// переменные для карточек
+// // // переменные для карточек
 const elementsContainer = document.querySelector('.elements');
 const elementTemplate = document.querySelector('#elements-template').content;
 
-// переменные для попапа полного экрана картинкок
+// // // переменные для попапа полного экрана картинкок
 const imgPopupImg = document.querySelector('.popup__image-img');
 const imgPopupName = document.querySelector('.popup__image-title');
 const imgPopup = document.querySelector('#popup-image');
 const imgExitButton = document.querySelector('.popup__exit_img')
 
-// переменные для попапа добавления карточек пользователем
+// // переменные для попапа добавления карточек пользователем
 const addPopup = document.querySelector('#popup-add');
 const addButton = document.querySelector('.profile__add');
 const addFormElement = document.querySelector('#formAdd');
 const addNameInput = document.querySelector('#cardname');
 const addLinkInput = document.querySelector('#cardlink');
 const addExitButton = document.querySelector('.popup__exit_add');
-// const addSaveButton = document.querySelector('.popup__save_add');
 
 
 // функция открытия любого попапа
 function openPopup(popup) {
+  validateFormCard.resetError();
+  validateFormProfile.resetError();
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupEsc);
 }
@@ -46,7 +46,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEsc);
 }
-
 
 // закрытие попапа нажатием на ESC
 function closePopupEsc (evt) {
@@ -66,8 +65,6 @@ function closePopupOverlay (evt) {
 
 popup.addEventListener('click', closePopupOverlay);
 
-
-
 // функция открытия попапа с уже находящимися внутри данными
 function openPopupEdit() {
 nameInput.value = profileName.textContent;
@@ -75,102 +72,20 @@ jobInput.value = profileJob.textContent;
 openPopup(popup);
 }
 
-// функция изменеия данных в попапе и закрытия после сохранения
+// функция изменения данных в попапе и закрытия после сохранения
 function editFormSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popup);
+
 }
-
-// функции для слушателей лайка карточки
-function toggleLikeHandler(event) {
-  event.target.classList.toggle('elements__like_active');
-};
-
-// функция для слушателей удаления карточки
-function deleteCardHandler(event) {
-const deleteCard = event.target.closest('.elements__card');
-deleteCard.remove();
-};
-
-// функция связывания данных из карточки в попап раскрытия на весь экран и открытие этого попапа
-function viewImg(elementPlace) {
-imgPopupImg.src = elementPlace.querySelector('.elements__img').src;
-imgPopupImg.alt = elementPlace.querySelector('.elements__img').alt;
-imgPopupName.textContent = elementPlace.querySelector('.elements__title').textContent;
-openPopup(imgPopup);
-}
-
-// добавление первых 6 карточек при загрузке страницы и возможности лайкания, удаления, раскрытия их
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-// функция создания карточки
-function createCard(name, link) {
-
-  const elementPlace = elementTemplate.querySelector('.elements__card').cloneNode(true);
-
-  elementPlace.querySelector('.elements__img').src = link;
-  elementPlace.querySelector('.elements__img').alt = name;
-  elementPlace.querySelector('.elements__title').textContent = name;
-
-  // поставить, снять лайк
-  elementPlace.querySelector('.elements__like').addEventListener('click', toggleLikeHandler);
-
-  // удалить карточку
-  elementPlace.querySelector('.elements__delete').addEventListener('click', deleteCardHandler);
-
-  // раскрытие на весь экран
-  elementPlace.querySelector('.elements__img').addEventListener('click', function () {viewImg(elementPlace)});
-
-  //возвращается созданная карточка
-  return elementPlace;
-  }
-
-// функция,  перебирающая элементы из массива и добавляющая их в DOM
-initialCards.forEach(function(item) {
-  elementsContainer.append(createCard(item.name, item.link));
-});
-
-// функция, чтобы карточки мог добавить пользователь в DOM
-function addCard (event) {
-    event.preventDefault()
-    elementsContainer.prepend(createCard(addNameInput.value, addLinkInput.value));
-    closePopup(addPopup);
-    disableSaveButton (saveButtonStatus);
-    addFormElement.reset();
-  }
 
 // слушатели для открытия, закрытия и редактирования профиля пользователя
 editButton.addEventListener('click', openPopupEdit);
 exitButton.addEventListener('click', function () {closePopup(popup)});
 editFormElement.addEventListener('submit', editFormSubmitHandler);
-popup.addEventListener('click', closePopupOverlay);
+// popup.addEventListener('click', closePopupOverlay);
 
 // слушатели для открытия, закрытия добавления новых карточек пользователем
 addButton.addEventListener('click', function () {openPopup(addPopup)});
@@ -178,9 +93,45 @@ addExitButton.addEventListener('click', function () {closePopup(addPopup)});
 addFormElement.addEventListener('submit', addCard);
 addPopup.addEventListener('click', closePopupOverlay);
 
-// закрытие карточки на весь экран
+// // закрытие карточки на весь экран
 imgExitButton.addEventListener('click', function () {closePopup(imgPopup)});
 imgPopup.addEventListener('click', closePopupOverlay);
 
 
+// перебор первых 6 карточек из массива
+initialCards.forEach((item) => {
+  const newCard = new Card(item, '#elements-template');
+  const newCardElement = newCard.generateCard();
+  document.querySelector('.elements').append(newCardElement);
+})
 
+// функция, чтобы карточки мог добавить пользователь в DOM
+function addCard (event) {
+    event.preventDefault();
+    const newCard = new Card({name: addNameInput.value, link: addLinkInput.value}, '#elements-template');
+    const newCardElement = newCard.generateCard();
+    document.querySelector('.elements').prepend(newCardElement);
+    closePopup(addPopup);
+    validateFormCard.toggleButtonState();
+    addFormElement.reset();
+  }
+
+// функция связывания данных из карточки в попап раскрытия на весь экран и открытие этого попапа
+  function viewImg(item) {
+    imgPopupImg.src = item.querySelector('.elements__img').src;
+    imgPopupImg.alt = item.querySelector('.elements__img').alt;
+    imgPopupName.textContent = item.querySelector('.elements__title').textContent;
+    openPopup(imgPopup);
+  }
+
+
+// создание нового экзмепляра класса валидации для формы ред.пользователя
+const validateFormProfile = new FormValidator(ValidationSetup, editFormElement);
+validateFormProfile.enableValidation();
+
+// создание нового экземпляра класса валидации для формы добавления карточки.
+const validateFormCard = new FormValidator(ValidationSetup, addFormElement);
+validateFormCard.enableValidation();
+
+
+export {viewImg};
