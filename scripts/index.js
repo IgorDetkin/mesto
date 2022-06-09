@@ -5,8 +5,7 @@ import {FormValidator} from './FormValidator.js'
 // попап редактирования  и сохранения данных профиля
 const buttonEdit = document.querySelector('.profile__edit');
 const popupEdit = document.querySelector('#popup-edit')
-// каждый новый Ревьювер говорит, что у меня неправильно названа эта переменная и сама реализация. Я переделываю как он хочет.
-// Потом во время сдачи следующей ПР мне другой Ревьювер говорит, что неправильно названа эта переменная и сама реализация.
+
 const buttonExitPopup = document.querySelector('.popup__exit');
 const formElementEdit = document.querySelector('.popup__form');
 const nameInput = document.querySelector('#name-input');
