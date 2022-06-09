@@ -1,54 +1,27 @@
-import {viewImg} from './script.js'
-
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
+import {viewImg} from './index.js'
 
  class Card {
-  constructor (initialCards) {
+  constructor (initialCards, cardSelector) {
     this._link = initialCards.link;
     this._name = initialCards.name;
+    this._cardSelector = cardSelector;
     // this._viewImg = viewImg;
   }
 
   // найти нужный элемент
   _getTemplate() {
-    const cardElement = document.querySelector('#elements-template').content.querySelector('.elements__card').cloneNode(true);
+    const cardElement = document.querySelector(this._cardSelector).content.querySelector('.elements__card').cloneNode(true);
     return cardElement
   }
 
   // вставить карточку в разметку
   generateCard () {
     this._element = this._getTemplate();
-    this._setEventListeners();
-
     this._elementTitle = this._element.querySelector(".elements__title");
     this._elementImg = this._element.querySelector(".elements__img");
+    this._like = this._element.querySelector(".elements__like");
+
+    this._setEventListeners();
 
     this._elementImg.src = this._link;
     this._elementImg.alt = this._name;
@@ -59,20 +32,21 @@ const initialCards = [
 
 // // метод лайка карточки
 _toggleLikeHandler() {
-  this._element.querySelector('.elements__like').classList.toggle('elements__like_active');
+  this._like.classList.toggle('elements__like_active');
 };
 
 // // метод удаления карточки
 _deleteCardHandler() {
   this._element.remove();
+  this._element = null;
 };
 
 // слушатели
 _setEventListeners () {
-  this._element.querySelector('.elements__like').addEventListener('click', () => {this._toggleLikeHandler()});
+  this._like.addEventListener('click', () => {this._toggleLikeHandler()});
   this._element.querySelector('.elements__delete').addEventListener('click', () => {this._deleteCardHandler()});
   this._element.querySelector('.elements__img').addEventListener('click', () => {viewImg(this._element)});
   }
 }
 
-export {initialCards, Card};
+export {Card};
