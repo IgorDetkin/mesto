@@ -1,6 +1,6 @@
 
 import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js'
+import {FormValidator} from './ValidatorForm.js'
 
 // попап редактирования  и сохранения данных профиля
 const buttonEdit = document.querySelector('.profile__edit');
@@ -56,19 +56,18 @@ function closePopupEsc (evt) {
 
 // закрытие любого попапа кликом на оверлэй
 function closePopupOverlay (evt) {
-  const openedPopup = document.querySelector('.popup_opened');
   if (evt.target === evt.currentTarget) {
-  closePopup(openedPopup);
+  closePopup(evt.currentTarget);
   };
 }
 
-popupEdit.addEventListener('click', closePopupOverlay);
+popupEdit.addEventListener('mousedown', closePopupOverlay);
 
 // функция открытия попапа с уже находящимися внутри данными
 function openPopupEdit() {
-validateFormProfile.resetError()
 nameInput.value = profileName.textContent;
 jobInput.value = profileJob.textContent;
+validateFormProfile.resetError();
 openPopup(popupEdit);
 
 }
@@ -88,7 +87,10 @@ formElementEdit.addEventListener('submit', editFormSubmitHandler);
 // popup.addEventListener('click', closePopupOverlay);
 
 // слушатели для открытия, закрытия добавления новых карточек пользователем
-buttonAdd.addEventListener('click', function () {openPopup(popupAdd), validateFormCard.resetError()});
+buttonAdd.addEventListener('click', function () {
+  openPopup(popupAdd);
+  validateFormCard.resetError();
+});
 buttonExitPopupAdd.addEventListener('click', function () {closePopup(popupAdd)});
 formElementAdd.addEventListener('submit', addCard);
 popupAdd.addEventListener('click', closePopupOverlay);
@@ -145,7 +147,6 @@ function addCard (event) {
     elementsContainer.prepend(newCardElement);
     closePopup(popupAdd);
     formElementAdd.reset();
-    validateFormCard.toggleButtonState();
   }
 
 // функция связывания данных из карточки в попап раскрытия на весь экран и открытие этого попапа
@@ -157,7 +158,7 @@ function addCard (event) {
   }
 
 
-const ValidationSetup = {
+const validationSetup = {
   formSelector: '.popup__form',
   inputSelector: '.popup__name',
   submitButtonSelector: '.popup__save',
@@ -167,11 +168,11 @@ const ValidationSetup = {
 };
 
 // создание нового экзмепляра класса валидации для формы ред.пользователя
-const validateFormProfile = new FormValidator(ValidationSetup, formElementEdit);
+const validateFormProfile = new FormValidator(validationSetup, formElementEdit);
 validateFormProfile.enableValidation();
 
 // создание нового экземпляра класса валидации для формы добавления карточки.
-const validateFormCard = new FormValidator(ValidationSetup, formElementAdd);
+const validateFormCard = new FormValidator(validationSetup, formElementAdd);
 validateFormCard.enableValidation();
 
 

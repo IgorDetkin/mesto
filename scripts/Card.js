@@ -45,7 +45,7 @@ _deleteCardHandler() {
 _setEventListeners () {
   this._like.addEventListener('click', () => {this._toggleLikeHandler()});
   this._element.querySelector('.elements__delete').addEventListener('click', () => {this._deleteCardHandler()});
-  this._element.querySelector('.elements__img').addEventListener('click', () => {viewImg(this._element)});
+  this._elementImg.addEventListener('click', () => {viewImg(this._element)});
   }
 }
 
