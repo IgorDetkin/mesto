@@ -1,6 +1,6 @@
 
 import {Card} from './Card.js';
-import {FormValidator} from './ValidatorForm.js'
+import {FormValidator} from './FormValidator.js'
 
 // попап редактирования  и сохранения данных профиля
 const buttonEdit = document.querySelector('.profile__edit');
