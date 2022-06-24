@@ -6,9 +6,9 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
-    "homepage": "https://igordetkin.github.io/mesto/",
+    "homepage": "https://igordetkin.github.io/mesto",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
