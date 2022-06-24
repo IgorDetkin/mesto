@@ -1,11 +1,10 @@
-import {viewImg} from './index.js'
+import {handleCardClick} from '../pages/index.js'
 
  class Card {
   constructor (initialCards, cardSelector) {
     this._link = initialCards.link;
     this._name = initialCards.name;
     this._cardSelector = cardSelector;
-    // this._viewImg = viewImg;
   }
 
   // найти нужный элемент
@@ -26,7 +25,6 @@ import {viewImg} from './index.js'
     this._elementImg.src = this._link;
     this._elementImg.alt = this._name;
     this._elementTitle.textContent = this._name;
-    // viewImg(this._element);
     return this._element
   }
 
@@ -45,7 +43,7 @@ _deleteCardHandler() {
 _setEventListeners () {
   this._like.addEventListener('click', () => {this._toggleLikeHandler()});
   this._element.querySelector('.elements__delete').addEventListener('click', () => {this._deleteCardHandler()});
-  this._elementImg.addEventListener('click', () => {viewImg(this._element)});
+  this._elementImg.addEventListener('click', () => {handleCardClick(this._element)});
   }
 }
 
