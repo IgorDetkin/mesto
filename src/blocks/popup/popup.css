@@ -12,3 +12,7 @@
   justify-content: center;
   align-items: center;
 }
+
+#popup-image {
+  background: rgba(0, 0, 0, 0.9);
+}
