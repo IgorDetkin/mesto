@@ -37,7 +37,7 @@ const addCard = (data) => {
     name: data.name,
     link: data.link
   }); //ВНИМАНИЕ!!!!!!!!
-  elementsContainer.prepend(newCardElement);
+  newSection.setItem(newCardElement);
   newPopupAddCard.close();
   formElementAdd.reset();
 }

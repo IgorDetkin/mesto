@@ -15,7 +15,7 @@ class Section {
 
   // добавление в ДОМ
   setItem (element) {
-  this._container.append(element);
+  this._container.prepend(element);
   }
 }
 
