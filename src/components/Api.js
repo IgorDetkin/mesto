@@ -44,8 +44,6 @@ class Api {
       headers: this._headers,
       method: 'PATCH',
       body: JSON.stringify({
-        // name: 'Буйвол',
-        // about: 'тещаааа'
         name: data.name,
         about: data.about
     })
@@ -66,8 +64,6 @@ addNewCard(data) {
     body: JSON.stringify({
       name: data.name,
       link: data.link
-      // name: 'Тещаааа',
-      // link: 'https://img.pac.ru/resorts/213123/185354/big/4C93B02D7F0001017EF5149798A2045D.jpg'
   })
 })
   .then((res) => {
@@ -86,9 +82,6 @@ deleteCard(cardId) {
   return fetch(`${this._baseUrl}/cards/${cardId}`,
   {headers: this._headers,
     method: 'DELETE',
-    // body: JSON.stringify({
-      // _id: cardId
-  // })
   })
 
   .then((res) => {
@@ -136,9 +129,6 @@ editProfileAvatar(data) {
   headers: this._headers,
   body: JSON.stringify({
     avatar: data.avatar
-      // avatar: 'https://varlamov.me/2018/murmansk_komfortniy_pizdec/16.jpg'
-      // avatar: 'https://static.life.ru/posts/2018/03/1103416/b6fb5cbc0f37655a17e8052dc345f64f.jpg'
-
     })
   })
   .then((res) => {

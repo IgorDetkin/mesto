@@ -8,7 +8,7 @@ import {PopupWithForm} from './components/PopupWithForm.js';
 import {UserInfo} from './components/UserInfo.js';
 import {initialCards, validationSetup} from './utils/data.js';
 import {buttonEdit, formElementEdit, nameInput, jobInput,
-  elementsContainer, buttonAdd, formElementAdd, buttonEditAvatar } from './utils/constants.js';
+  elementsContainer, buttonAdd, formElementAdd, buttonEditAvatar, formElementAvatar} from './utils/constants.js';
 import {PopupWithFormDelete} from './components/PopupWithFormDelete.js';
 import './index.css';
 import {Api} from './components/Api.js'
@@ -22,17 +22,6 @@ const newApi = new Api({
 });
 
 let userId = null;
-
-//так мы получаем данные с сервера о пользователе
-newApi.getUserInfo()
-  .then((data) => {
-    userId = data._id;
-    newEditUserInfo.setUserInfo(data.name, data.about);
-    newEditUserInfo.editAvatar(data.avatar);
-  })
-  .catch((err) => {
-    console.log(`${err}`);
-  })
 
 
 // открытие попапа с уже существующими данными
@@ -77,9 +66,7 @@ function openPopupEdit() {
         console.log(`Ошибка: ${err}`);
       })
       }
-
     }
-
   )
   return newCard.generateCard(data);
 }
@@ -90,6 +77,7 @@ function deleteCardIconClick(item) {
   newPopupWithFormDelete.open();
   newPopupWithFormDelete.setSubmitAction(() => {
     // debugger;
+    newPopupWithFormDelete.loadingButton(true, 'Удаление...', 'Да');
     newApi.deleteCard(item)
     .then(() => {
       this.deleteCardHandler();
@@ -98,33 +86,21 @@ function deleteCardIconClick(item) {
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
       })
+    .finally(() =>{
+      newPopupWithFormDelete.loadingButton(false, 'Удаление...', 'Да')
+      })
     });
   };
-// // удаление карточки работающее без серверной части
-// function deleteMyCard() {
-//   newPopupWithFormDelete.open();
-//   newPopupWithFormDelete.setSubmitAction(() => {
-//     this.deleteCardHandler(this);
-//     newPopupWithFormDelete.close();
-//     });
-//   };
-
-// // сабмит формы изменения данных пользователя без серверной части. name и about - имена инпутов(см. в html)
-// const editFormSubmitHandler = (data) => {
-//   const { name, about } = data;
-//   newEditUserInfo.setUserInfo(name, about);
-//   newPopupEdit.close();
-// };
 
 
 // АВАТАР!!!!!!
    const avatarFormSubmitHandler = (data) => {
-    newPopupAvatar.loadingButton(true);
+    newPopupAvatar.loadingButton(true, 'Сохранение...', 'Cохранить');
     newApi.editProfileAvatar({
       avatar: data.avatarLink
     })
     .then(() => {
-    newEditUserInfo.editAvatar(data.avatarLink);
+    newEditUserInfo.setAvatar(data.avatarLink);
     newPopupAvatar.close()
     // console.dir(data.avatarLink)
     })
@@ -132,12 +108,13 @@ function deleteCardIconClick(item) {
       console.log(`Ошибка: ${err}`);
     })
     .finally(() =>{
-      newPopupAvatar.loadingButton(false)
+      newPopupAvatar.loadingButton(false, 'Сохранение...', 'Cохранить')
     })
   }
 
 
 const addCard = (data) => {
+  newPopupAddCard.loadingButton(true, 'Создание...', 'Cоздать');
   newApi.addNewCard({
       name: data.name,
       link: data.link
@@ -148,6 +125,10 @@ const addCard = (data) => {
   })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
+  })
+  .finally(() =>{
+    newPopupAddCard.loadingButton(false, 'Создание...', 'Cоздать');
+
   })
 }
 
@@ -162,16 +143,6 @@ const newSection = new Section(
   );
 
 
-// вызов метода класса в котором происходит перебор, внутри которого есть функция createcard
-newApi.getInitialCards()
-.then((data)  => {
-  newSection.renderItems(data);
-  })
-.catch((err) => {
-  console.log(`Ошибка: ${err}`);
-  })
-
-
 // создание экземпляра отвечающего за отображение информации о пользователе на странице
 const newEditUserInfo = new UserInfo ({
   nameSelector: '.profile__title',
@@ -182,7 +153,7 @@ const newEditUserInfo = new UserInfo ({
 
 // сабмит формы изменения имени
 const editFormSubmitHandler = (data) => {
-  newPopupEdit.loadingButton(true); //
+  newPopupEdit.loadingButton(true, 'Сохранение...', 'Cохранить'); //
   const { name, about } = data;
   newApi.editUserProfile({
     name: data.name,
@@ -196,7 +167,7 @@ const editFormSubmitHandler = (data) => {
   console.log(`${err}`);
 })
 .finally(() =>{
-  newPopupEdit.loadingButton(false)
+  newPopupEdit.loadingButton(false, 'Сохранение...', 'Cохранить')
 })
 };
 
@@ -208,6 +179,9 @@ validateFormProfile.enableValidation();
 // создание нового экземпляра класса валидации для формы добавления карточки.
 const validateFormCard = new FormValidator(validationSetup, formElementAdd);
 validateFormCard.enableValidation();
+
+const validateFormAvatar = new FormValidator(validationSetup, formElementAvatar);
+validateFormAvatar.enableValidation();
 
 
 const newPopupEdit = new PopupWithForm('#popup-edit', editFormSubmitHandler);
@@ -231,6 +205,23 @@ buttonAdd.addEventListener('click', function () {
 });
 buttonEditAvatar.addEventListener('click', function () {
   newPopupAvatar.open();
+  validateFormAvatar.resetError();
 });
 
-// console.log(newApi.getInitialCards())
+
+
+
+//чтобы начальные данные отрисовывались после проверки айди пользователя
+Promise.all([
+  newApi.getUserInfo(), //так мы получаем данные с сервера о пользователе
+  newApi.getInitialCards() // вызов метода класса в котором происходит перебор, внутри которого есть функция createcard
+])
+  .then(([data, cards]) => {
+    userId = data._id;
+    newEditUserInfo.setUserInfo(data.name, data.about);
+    newEditUserInfo.setAvatar(data.avatar);
+    newSection.renderItems(cards);
+  })
+  .catch((err) => {
+    console.log(`Ошибка: ${err}`);
+    })

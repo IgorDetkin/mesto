@@ -20,6 +20,15 @@ class PopupWithFormDelete extends Popup {
     // this._deleteButtonYes.addEventListener('click', this._handleSubmitCallback);
   }
 
+  loadingButton(loading, loadingText, LoadedText) {
+    if(loading) {
+      this._deleteButtonYes.textContent = loadingText
+    }
+    else (
+      this._deleteButtonYes.textContent = LoadedText
+    )
+    }
+
 }
 
 export {PopupWithFormDelete};

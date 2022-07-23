@@ -22,7 +22,7 @@ class UserInfo {
     // this._avatar.src = userAvatar;
      };
 
-  editAvatar(userAvatar) {
+  setAvatar(userAvatar) {
     this._avatar.src = userAvatar;
   };
 

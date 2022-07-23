@@ -31,14 +31,24 @@ class PopupWithForm extends Popup {
   }
 
 
-loadingButton(loading) {
+// loadingButton(loading) {
+//   if(loading) {
+//     this._submitButton.textContent = 'Сохранение...'
+//   }
+//   else (
+//     this._submitButton.textContent = 'Сохранить'
+//   )
+//   }
+
+loadingButton(loading, loadingText, LoadedText) {
   if(loading) {
-    this._submitButton.textContent = 'Сохранение...'
+    this._submitButton.textContent = loadingText
   }
   else (
-    this._submitButton.textContent = 'Сохранить'
+    this._submitButton.textContent = LoadedText
   )
   }
+
 
 }
 

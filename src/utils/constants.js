@@ -30,6 +30,6 @@ export const linkInputAdd = document.querySelector('#cardlink');
 // const buttonExitPopupAdd = document.querySelector('.popup__exit_add');
 
 export const buttonEditAvatar = document.querySelector('.profile__image-hover');
-export const linkInputAvatar = document.querySelector('#avatar');
 export const formElementAvatar = document.querySelector('#formAvatar');
+export const linkInputAvatar = document.querySelector('#avatar');
 // export default constants.js;
