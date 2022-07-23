@@ -15,3 +15,8 @@
 .elements__delete:hover {
   opacity: 0.5;
 }
+
+
+.elements__delete_hidden {
+  visibility: hidden;
+}

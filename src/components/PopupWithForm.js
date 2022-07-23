@@ -6,6 +6,7 @@ class PopupWithForm extends Popup {
     this._submitHandler = submitForm;
     this._form = this._popup.querySelector('.popup__form');
     this._inputs = this._form.querySelectorAll('.popup__name'); //сделать массивоподобный объект
+    this._submitButton = this._popup.querySelector('.popup__form-submit');
   }
 
   _getInputValues() {
@@ -18,14 +19,27 @@ class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener('submit', () => {this._submitHandler(this._getInputValues())});
-
+    this._form.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._submitHandler(this._getInputValues())});
+    //форма.послушать(сабмит, функция внутри которой аватарсабмтихандлер с аргументом )
   };
 
   close() {
     super.close();
     this._form.reset();
   }
+
+
+loadingButton(loading) {
+  if(loading) {
+    this._submitButton.textContent = 'Сохранение...'
+  }
+  else (
+    this._submitButton.textContent = 'Сохранить'
+  )
+  }
+
 }
 
 export {PopupWithForm};
