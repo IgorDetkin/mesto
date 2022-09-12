@@ -1,12 +1,11 @@
 {
   "name": "mesto",
   "version": "1.0.0",
-  "description": "сервис Mesto для публикации фотографий, в котором можно оценивать публикации, добавлять новые публикации, удалять публикации, открывать фотографии на весь экран, \r а также редактировать информацию о пользователе.",
+  "description": "сервис Mesto",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
-    "homepage": "https://igordetkin.github.io/mesto",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -19,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/IgorDetkin/mesto/issues"
   },
-  "homepage": "https://github.com/IgorDetkin/mesto#readme",
+  "homepage": "https://igordetkin.github.io/mesto",
   "devDependencies": {
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
