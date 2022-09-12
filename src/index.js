@@ -209,10 +209,17 @@ buttonEditAvatar.addEventListener('click', function () {
 });
 
 
-
+// function preLoader(loading) {
+//   if(loading) {
+//     document.querySelector('.root').classList.add('.root_preload')
+//   }
+//   else {
+//     document.querySelector('.root').classList.remove('.root_preload')}
+// }
 
 //чтобы начальные данные отрисовывались после проверки айди пользователя
 Promise.all([
+  // preLoader(true),
   newApi.getUserInfo(), //так мы получаем данные с сервера о пользователе
   newApi.getInitialCards() // вызов метода класса в котором происходит перебор, внутри которого есть функция createcard
 ])
@@ -225,3 +232,6 @@ Promise.all([
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
     })
+  // .finally(() =>{
+    // preLoader(false)
+    // })
