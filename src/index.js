@@ -6,7 +6,7 @@ import {Section} from './components/Section.js';
 import {PopupWithImage} from './components/PopupWithImage.js';
 import {PopupWithForm} from './components/PopupWithForm.js';
 import {UserInfo} from './components/UserInfo.js';
-import {initialCards, validationSetup} from './utils/data.js';
+import {validationSetup} from './utils/data.js';
 import {buttonEdit, formElementEdit, nameInput, jobInput,
   elementsContainer, buttonAdd, formElementAdd, buttonEditAvatar, formElementAvatar} from './utils/constants.js';
 import {PopupWithFormDelete} from './components/PopupWithFormDelete.js';
